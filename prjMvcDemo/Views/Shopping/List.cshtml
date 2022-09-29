@@ -1,0 +1,61 @@
+﻿@model IEnumerable<prjMvcDemo.tProduct>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>
+    線上購物
+</h2>
+
+<p>
+    @Html.ActionLink("檢視 Session", "CartView")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            序
+        </th>
+        <th>
+            特價品項
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.fQty)
+        </th>
+        <th>
+            特惠價
+        </th>
+        <th></th>
+    </tr>
+
+@{ 
+    int count = 0;
+    foreach (var item in Model)
+    {
+        count++;
+    <tr>
+        <td>
+            @count
+        </td>
+        <td>
+            <div>
+                <img src="~/Images/@item.fImagePath" width="200" height="150" />
+            </div>
+            <br/>
+            <h2>@Html.DisplayFor(modelItem => item.fName)</h2>
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.fQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fPrice)
+        </td>
+        <td>
+            @Html.ActionLink("加入購物車", "AddToCart", new { id = item.fId }) |
+            @Html.ActionLink("加入 Session", "AddToSession", new { id = item.fId })
+        </td>
+    </tr>
+        }
+    }
+</table>

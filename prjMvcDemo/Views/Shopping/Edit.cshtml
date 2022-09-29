@@ -1,0 +1,42 @@
+﻿@model prjMvcDemo.Models.CShoppingCartItem
+
+
+@{
+    ViewBag.Title = "Edit";
+    int aaa = ViewBag.count;
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <input type="hidden" name="productId" value="@Model.productId" />
+
+            <div class="col-md-10">
+                數量<br />
+                @Html.TextBox("count", aaa, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-2">
+                <input type="submit" value="確定" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

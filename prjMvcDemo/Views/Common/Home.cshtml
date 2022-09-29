@@ -1,0 +1,9 @@
+﻿@using prjMvcDemo.Models
+@{
+    CCustomer user = Session[CDictionary.SK_LOGINED_USER] as CCustomer;
+
+    ViewBag.Title = "Home";
+}
+
+<h2>歡迎 @user.fName [@user.fEmail]登入系統</h2>
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<prjMvcDemo.Models.CShoppingCartItem>
+
+@{
+    ViewBag.Title = "CartView";
+}
+
+<h2>檢視購物車</h2>
+
+<p>
+    @Html.ActionLink("結帳購物車", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            序
+        </th>
+        <th>
+            購買品項
+        </th>
+        <th>
+            採購量
+        </th>
+        <th>
+            單價
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.小計)
+        </th>
+        <th></th>
+    </tr>
+
+@{ 
+    int count = 0;
+    decimal sum = 0;
+    decimal pay = 0;
+    decimal tax = 0;
+    foreach (var item in Model)
+    {
+        count++;
+        sum += item.小計;
+    <tr>
+        <td>
+            @count
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.fName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.小計)
+        </td>
+        <td>
+            @Html.ActionLink("修改數量", "Edit", new { id=item.productId }) |
+            @Html.ActionLink("取消", "Details", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+    }
+    tax = sum * 0.05M;
+    pay = sum + tax;
+    }
+
+</table>
+<li>交易金額：@sum.ToString("###,###,##0")</li>
+<li>稅　　額：@tax.ToString("###,###,##0")</li>
+<li>應付金額：@pay.ToString("###,###,##0")</li>
